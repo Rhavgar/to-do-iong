@@ -1,0 +1,25 @@
+<ion-content>
+<div>
+
+
+<h3>Cadastre suas tarefas</h3>
+
+<div id="vid">
+<input type="text" [(ngModel)]="phTask" (keyup.enter)="addTask()">
+<ion-button (click)="addTask()">Adicionar</ion-button>
+</div>
+
+<li *ngFor="let item of taskList; let i = index">
+  
+  <ion-checkbox color="secondary" slot="start" [(ngModel)]="item.done" [hidden]="item.edit"></ion-checkbox>
+  <p [style.text-decoration]="item.done ? 'line-through': 'solid'" *ngIf="!item.edit">{{ item.task }}</p>
+  
+  <input type="text" [(ngModel)]="item.task" [hidden]="!item.edit">
+  <ion-button (click)="item.task ? updateTask(i) : null">{{item.edit ? 'Salvar' : 'Editar'}}</ion-button>
+  
+  <ion-button (click)="removeTask(i)" [hidden]="item.edit">Excluir</ion-button>
+  
+</li>
+
+</div>
+</ion-content>
